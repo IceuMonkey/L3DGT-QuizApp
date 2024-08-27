@@ -17,10 +17,7 @@ def quizlist():
 def show_user(username):
     return f'Hello {username}'
 
-# # Admin routing
-# @app.route("/admin")
-# def admin():
-#     return redirect(url_for("user", name="Admin!"))
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
+# debug=True will automatically rerun the app whe I make a change to the code
