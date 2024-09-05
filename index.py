@@ -1,10 +1,11 @@
-from flask import Flask, redirect, url_for, render_template, request, session
+from flask import Flask, redirect, url_for, render_template, request, session, flash
 from datetime import timedelta
 from markupsafe import escape
+# import sqlalchemy
 
 app = Flask(__name__)
 app.secret_key = "hello test"
-app.permanent_session_lifetime = timedelta(minutes=5) #Will stay logged in for 5 minutes
+app.permanent_session_lifetime = timedelta(minutes=5) #Will stay logged in for 5 minutes after closing app
 
 # Basic App route
 @app.route("/")
@@ -24,26 +25,32 @@ def login():
         session.permanent = True #Saves session data "permanently" 
         user = request.form["nm"]
         session["user"] = user  
+        flash("Login Successful!")
         return redirect(url_for("user"))
     else:
         if "user" in session:
+            flash("Already Logged in")
             return redirect(url_for("user"))
         
         return render_template("login.html")
 
-# Dynamic routing for user page
+# User route after logging in
 @app.route("/user") 
 def user():
     if "user" in session:
         user = session["user"]
-        return f"<h1>{user}</h1>"
+        return render_template("user.html", user=user)
     else:
+        flash("You are not logged in!")
         return redirect(url_for("login"))
 
 # Logout function
 @app.route("/logout")
 def logout():
-    session.pop("user", None)
+    if "user" in session:
+        user = session["user"] 
+        flash("you have been logged out!", "info")
+    session.pop("user", None) #clears session
     return redirect(url_for("login"))
 
 
