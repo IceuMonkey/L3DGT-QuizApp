@@ -13,7 +13,7 @@
     <!-- NAV BAR -->
     <nav class="navbar bg-light sticky-top">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Quiziest Quiziest</a>
+        <a class="navbar-brand" href="#">Quiziest Quiz</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -36,9 +36,12 @@
       </div>
     </nav>
 
+    
     <!-- Page Specific content -->
-    {% block content %}
-    {% endblock %}
+    <div class="container-fluid">
+      {% block content %}
+      {% endblock %}
+    </div>
 
     <!-- Bootstrap JS CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>

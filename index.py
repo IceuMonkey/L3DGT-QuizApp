@@ -1,11 +1,26 @@
 from flask import Flask, redirect, url_for, render_template, request, session, flash
 from datetime import timedelta
 from markupsafe import escape
-# import sqlalchemy
+from flask_sqlalchemy import SQLAlchemy
 
+# Config Stuff
 app = Flask(__name__)
 app.secret_key = "hello test"
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite://users.sqlite3'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False # Removes warning when database if is modified
 app.permanent_session_lifetime = timedelta(minutes=5) #Will stay logged in for 5 minutes after closing app
+
+# DATABASE
+db = SQLAlchemy(app)
+
+class users(db.Model):
+    _id = db.Column("id", db.Integer, primary_key=True)
+    name = db.Column("name", db.String(100))
+    
+    def __init__(self, name, email):
+        self.name = name
+        self.email = email
+
 
 # Basic App route
 @app.route("/")
@@ -35,11 +50,21 @@ def login():
         return render_template("login.html")
 
 # User route after logging in
-@app.route("/user") 
+@app.route("/user", methods=["POST", "GET"]) 
 def user():
+    email = None
     if "user" in session:
         user = session["user"]
-        return render_template("user.html", user=user)
+
+        if request.method == "POST":
+            email = request.form["email"]
+            session["email"] = email
+            flash("Email was Saved!")
+        else:
+            if "email" in session:
+                email = session["email"]
+
+        return render_template("user.html", email=email)
     else:
         flash("You are not logged in!")
         return redirect(url_for("login"))
@@ -51,10 +76,12 @@ def logout():
         user = session["user"] 
         flash("you have been logged out!", "info")
     session.pop("user", None) #clears session
+    session.pop("email", None)
     return redirect(url_for("login"))
 
 
 
 if __name__ == "__main__":
+    db.create_all()
     app.run(debug=True)
 # debug=True will automatically rerun the app whe I make a change to the code
