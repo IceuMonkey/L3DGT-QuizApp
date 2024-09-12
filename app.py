@@ -1,7 +1,10 @@
 from flask import Flask, redirect, url_for, render_template, request, session, flash
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
+from flask_bcrypt import Bcrypt
 from datetime import timedelta
 from markupsafe import escape
-from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import MetaData
 
 # Config Stuff
 app = Flask(__name__)
@@ -10,16 +13,37 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.sqlite3'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False # Removes warning when database if is modified
 app.permanent_session_lifetime = timedelta(minutes=5) #Will stay logged in for 5 minutes after closing app
 
-# DATABASE
-db = SQLAlchemy(app)
+### DATABASE
+# Constraint Naming Convetion
+naming_convention = {
+    "ix": 'ix_%(column_0_label)s',
+    "uq": "uq_%(table_name)s_%(column_0_name)s",
+    "ck": "ck_%(table_name)s_%(constraint_name)s",
+    "fk": "fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s",
+    "pk": "pk_%(table_name)s"
+}
+metadata = MetaData(naming_convention=naming_convention)
+
+# Config
+db = SQLAlchemy(app, metadata=metadata)
+migrate = Migrate(app, db, render_as_batch=True)
+# Schema
 class users(db.Model):
     _id = db.Column("id", db.Integer, primary_key=True) 
     name = db.Column("name", db.String(100))
-    email = db.Column("email", db.String(100))
+    email = db.Column("email", db.String(150), unique=True)
+    highscore = db.Column("highscore", db.Integer, db.CheckConstraint('highscore >= 0', name='check_highscore_positive'))
     
-    def __init__(self, name, email):
+    __table_args__ = (
+        db.UniqueConstraint('name', name='uq_user_name'),
+        db.UniqueConstraint('email', name='uq_user_email'),
+        db.UniqueConstraint('highscore', name='uq_user_highscore'),
+    )
+
+    def __init__(self, name, email, highscore):
         self.name = name
         self.email = email
+        self.highscore = highscore
 
 # Basic App route
 @app.route("/")
@@ -91,6 +115,8 @@ def logout():
     # Clears session data
     session.pop("user", None) 
     session.pop("email", None)
+    session.pop("highscore", None)
+    #redirect to login page
     return redirect(url_for("login"))
 
 # Page to display database
