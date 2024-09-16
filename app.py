@@ -6,9 +6,14 @@ from datetime import timedelta
 from markupsafe import escape
 from sqlalchemy import MetaData
 
+#Blueprints
+from second import second
+
 # Config Stuff
 app = Flask(__name__)
-app.secret_key = "hello test" # key for session
+app.register_blueprint(second, url_prefix="admin")
+
+app.secret_key = "hjkhkjhkjkjh" # key for session
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.sqlite3'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False # Removes warning when database if is modified
 app.permanent_session_lifetime = timedelta(minutes=5) #Will stay logged in for 5 minutes after closing app
