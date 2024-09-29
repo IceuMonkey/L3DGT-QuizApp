@@ -1,7 +1,8 @@
 from flask import Flask, redirect, url_for, render_template, request, session, flash, Blueprint
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from flask_bcrypt import Bcrypt
+from flask_bcrypt import Bcrypt, check_password_hash
+from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from datetime import timedelta
 from sqlalchemy import MetaData
 
@@ -28,11 +29,21 @@ metadata = MetaData(naming_convention=naming_convention)
 # Other DB Config
 db = SQLAlchemy(app, metadata=metadata)
 migrate = Migrate(app, db, render_as_batch=True)
+bcrypt = Bcrypt(app)
+
+# Login Manager
+login_manager = LoginManager()
+login_manager.login_view = 'auth.login'
+login_manager.init_app(app)
+
+@login_manager.user_loader
+def load_user(id):
+    return users.query.get(int(id))
 
 #Blueprints
-from .models import users
-from .auth import auth as auth_blueprint
-from .routes import main as main_blueprint
+from website.models import users
+from website.auth import auth as auth_blueprint
+from website.routes import main as main_blueprint
 
 app.register_blueprint(auth_blueprint, url_prefix="/auth")
 app.register_blueprint(main_blueprint)

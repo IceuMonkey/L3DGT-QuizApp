@@ -1,10 +1,12 @@
-from . import db
+from . import db, bcrypt
+from flask_login import UserMixin
 
 # DB Schema
-class users(db.Model):
-    _id = db.Column("id", db.Integer, primary_key=True) 
+class users(db.Model, UserMixin):
+    id = db.Column("id", db.Integer, primary_key=True) 
     name = db.Column("name", db.String(100))
     email = db.Column("email", db.String(150), unique=True)
+    password = db.Column("password", db.String, nullable=False)
     highscore = db.Column("highscore", db.Integer, db.CheckConstraint('highscore >= 0', name='check_highscore_positive'))
     
     __table_args__ = (
@@ -13,7 +15,8 @@ class users(db.Model):
         db.UniqueConstraint('highscore', name='uq_user_highscore'),
     )
 
-    def __init__(self, name, email, highscore):
+    def __init__(self, name, email, password, highscore):
         self.name = name
         self.email = email
+        self.password = bcrypt.generate_password_hash(password).decode('utf-8')
         self.highscore = highscore

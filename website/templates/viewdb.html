@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}View All Users{% endblock %}
+{% block content %} 
+    <h2>All Users</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Highscore</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in values %}
+                <tr>
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.email }}</td>
+                    <td>{{ item.password }}</td>
+                    <td>{{ item.highscore }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

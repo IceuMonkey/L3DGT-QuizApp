@@ -15,7 +15,7 @@ def quizlist():
 
 
 # Page to display database
-@main.route("/view")
+@main.route("/viewdb")
 def view():
-    return render_template("view.html", values=users.query.all())
+    return render_template("viewdb.html", values=users.query.all())
 
