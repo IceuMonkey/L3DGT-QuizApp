@@ -49,4 +49,14 @@
     <br />
     <button type="submit" class="btn btn-primary">Login</button>
 </form>
+
+    <!-- Block to show flashed messages -->
+    {% with messages = get_flashed_messages() %}  
+        {% if messages %} <!-- Check if there are any messages -->
+            {% for msg in messages %}
+                <p>{{msg}}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    
 {% endblock %}

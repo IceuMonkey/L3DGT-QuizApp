@@ -12,11 +12,10 @@ class users(db.Model, UserMixin):
     __table_args__ = (
         db.UniqueConstraint('name', name='uq_user_name'),
         db.UniqueConstraint('email', name='uq_user_email'),
-        db.UniqueConstraint('highscore', name='uq_user_highscore'),
     )
 
     def __init__(self, name, email, password, highscore):
         self.name = name
         self.email = email
-        self.password = bcrypt.generate_password_hash(password).decode('utf-8')
+        self.password = password
         self.highscore = highscore

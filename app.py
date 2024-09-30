@@ -1,6 +1,5 @@
 from website import app # From __init__ file
 
-2
 if __name__ == "__main__":
     with app.app_context(): 
         from website.models import db

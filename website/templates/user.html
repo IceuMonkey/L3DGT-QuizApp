@@ -2,7 +2,6 @@
 {% block title %}User{% endblock %}
 
 {% block content %}
-
     <!-- Flashed Message Block -->
     {% with messages = get_flashed_messages() %}  
         {% if messages %} <!-- Check if there are any messages -->
@@ -12,8 +11,7 @@
         {% endif %}
     {% endwith %}
 
-<form action="#" method="POST">
-    <input type="email" name="email" placeholder="Enter Email" value="{{email if email}}"/>
-    <input type="submit" value="submit"/>
-</form>
+<h1>{{name}}</h1>
+<p>Your Highscore: {{highscore}}</p>
+
 {% endblock %}
