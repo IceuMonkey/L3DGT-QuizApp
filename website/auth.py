@@ -24,9 +24,7 @@ def login():
         else: # User doesn't exist in db
             flash("Email does not exist.", category='error')
 
-
-        flash("Login Successful!")
-        return render_template("login.html", found_user=current_user)
+    return render_template("login.html", found_user=current_user)
 
 @auth.route("/sign-up", methods=['GET', 'POST'])
 def sign_up():
