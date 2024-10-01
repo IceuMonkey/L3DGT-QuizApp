@@ -1,10 +1,11 @@
-from flask import Blueprint, render_template, request, session, redirect, url_for, flash
+from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import login_user, login_required, logout_user, current_user
 from flask_bcrypt import check_password_hash, generate_password_hash
-from . import db
+from .. import db
 from .models import users
+from ..extensions import bcrypt
 
-auth = Blueprint("auth", __name__, static_folder="static", template_folder="templates")
+auth = Blueprint("auth", __name__, static_folder="../static", template_folder="../templates")
 
 
 @auth.route("/login", methods=["POST", "GET"])

@@ -1,7 +1,6 @@
-from website import app # From __init__ file
+from website import create_app # From __init__ file
+
+app = create_app()
 
 if __name__ == "__main__":
-    with app.app_context(): 
-        from website.models import db
-        db.create_all() # Initialises DB on start up before running app
     app.run(debug=True) # debug=True will automatically reload dev server when a change to the code is detected

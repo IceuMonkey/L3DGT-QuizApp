@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template
-from .models import users
+from .auth.models import users
 
 main = Blueprint('main', __name__)
 
@@ -8,14 +8,9 @@ main = Blueprint('main', __name__)
 def index():
     return render_template("index.html")
 
-# Second App route 
-@main.route("/quiz")
-def quizlist():
-    return render_template("quiz.html")
 
-
-# Page to display database
-@main.route("/viewdb")
+# Routes to display databases
+@main.route("/users-db")
 def view():
-    return render_template("viewdb.html", values=users.query.all())
+    return render_template("usersdb.html", values=users.query.all())
 
