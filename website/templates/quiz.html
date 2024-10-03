@@ -1,0 +1,39 @@
+<!-- QUIZ TEMPLATE -->
+{% extends "base.html" %}
+{% block title %}Quiz{% endblock %}
+{% block content %}
+    <h2>{{ question.question_text }}</h2>
+    <div id="options">
+        {% for option in question.options %}
+            <button class="btn btn-primary option-btn" data-answer="{{ option }}">{{ option }}</button>
+        {% endfor %}
+    </div>
+    <div id="result"></div>
+{% endblock %}
+{% block scripts %}
+    <script>
+        document.querySelectorAll('.option-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const answer = this.getAttribute('data-answer');
+                fetch('/submit_answer', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ answer: answer })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.result === 'correct') {
+                        location.reload();
+                        // If Returned Result is "wrong" or "end", redirect to results page
+                    } else if (data.result === 'wrong') {
+                        window.location.href = '/result';
+                    } else if (data.result === 'end') {
+                        window.location.href = '/result';
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}

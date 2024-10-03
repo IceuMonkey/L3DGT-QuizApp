@@ -55,7 +55,7 @@ def sign_up():
             print(f'Password during sign-up: {password1}') # Debug: Print entered password
             hashed_password = generate_password_hash(password1).decode('utf-8')  # Hashes password using utf-8 encoding standard
             print(f'Hashed password during sign-up: {hashed_password}')  # Debug: Print hashed password
-            new_user = users(email=email, name=name, password=hashed_password, highscore=0)
+            new_user = users(email=email, name=name, password=hashed_password, best_streak=0)
             db.session.add(new_user)  # Adds user info into db session
             db.session.commit()  # Commits db session data to db
             login_user(new_user, remember=True)  # Adds user to current session i.e "logging them in" (via flask_login)
@@ -70,11 +70,11 @@ def sign_up():
 def user():
     email = current_user.email
     name = current_user.name
-    highscore = current_user.highscore
+    best_streak = current_user.best_streak
     return render_template("user.html", 
                            email=email, 
                            name=name,
-                           highscore=highscore
+                           best_streak=best_streak
                            )
 
 # Logout function

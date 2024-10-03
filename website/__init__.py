@@ -27,7 +27,7 @@ def create_app():
     # Registering Blueprints
     from .auth.auth import auth as auth_blueprint
     from .routes import main as main_blueprint
-    from .quiz import quiz_bp as quiz_blueprint
+    from .quiz.quiz import quiz_bp as quiz_blueprint
 
     app.register_blueprint(auth_blueprint, url_prefix="/")
     app.register_blueprint(quiz_blueprint)
