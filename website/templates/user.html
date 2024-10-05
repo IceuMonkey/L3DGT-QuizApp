@@ -12,6 +12,8 @@
     {% endwith %}
 
 <h1>Welcome, {{name}}</h1>
-<p>Your Highscore: {{highscore}}</p>
+<p>Your Highest Answer Streak: {{best_streak}}</p>
+<p>Total Questions Answered Correctly: {{total_solved}}</p>
+<a href="{{ url_for('quiz.quiz_view') }}" class="btn btn-primary">Start Quiz</a>
 
 {% endblock %}

@@ -3,5 +3,6 @@
 {% block content %}
     <h2>Your Current Streak: {{ correct_streak }}</h2>
     <h2>Your Best Streak: {{ best_streak }}</h2>
+    <h2>Total Questions Solved: {{ total_solved }}</h2>
     <a href="{{ url_for('quiz.quiz_view') }}" class="btn btn-primary">Try Again</a>
 {% endblock %}

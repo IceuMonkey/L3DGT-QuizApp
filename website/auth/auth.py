@@ -1,4 +1,5 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+# auth.py
+from flask import Blueprint, render_template, request, redirect, url_for, flash, session
 from flask_login import login_user, login_required, logout_user, current_user
 from flask_bcrypt import check_password_hash, generate_password_hash
 from .. import db
@@ -18,11 +19,11 @@ def login():
         print(f'Found user: {found_user}')  # Debug: Check if user is found
 
         if found_user: #If email is in db
-            print(f'User email: {found_user.email}')  # Debug: Check user email
-            print(f'User password hash: {found_user.password}')  # Debug: Check stored password hash
             if check_password_hash(found_user.password, password): # Returns true if inputted figure matchs the unhashed password
                 flash("Logged in Successfully!", category='success')
                 login_user(found_user, remember=True)
+                session['user_id'] = found_user.id
+                print(f"User ID set in session: {session['user_id']}")  # Debug print
                 return redirect(url_for('.user'))
             else:
                 flash("Incorrect password, try again.", category='error')
@@ -71,10 +72,12 @@ def user():
     email = current_user.email
     name = current_user.name
     best_streak = current_user.best_streak
+    total_solved = current_user.total_solved
     return render_template("user.html", 
                            email=email, 
                            name=name,
-                           best_streak=best_streak
+                           best_streak=best_streak,
+                           total_solved=total_solved
                            )
 
 # Logout function

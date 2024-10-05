@@ -1,5 +1,11 @@
 {% extends "base.html" %}
+
 {% block title %}View All Questions{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" type='text/css' href="{{ url_for('static', filename='datatable.css')}}">
+{% endblock %}
+
 {% block content %} 
     <h2>All Questions</h2>
     <table>

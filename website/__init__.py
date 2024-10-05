@@ -27,11 +27,13 @@ def create_app():
     # Registering Blueprints
     from .auth.auth import auth as auth_blueprint
     from .routes import main as main_blueprint
+    from .dbroutes import db_bp as db_blueprint
     from .quiz.quiz import quiz_bp as quiz_blueprint
 
-    app.register_blueprint(auth_blueprint, url_prefix="/")
+    app.register_blueprint(auth_blueprint)
     app.register_blueprint(quiz_blueprint)
     app.register_blueprint(main_blueprint)
+    app.register_blueprint(db_blueprint)
 
     print("Blueprints registered: ", app.blueprints)  # Debug: Print registered blueprints
 

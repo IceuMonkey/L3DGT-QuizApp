@@ -1,5 +1,11 @@
 {% extends "base.html" %}
+
 {% block title %}View All Users{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" type='text/css' href="{{ url_for('static', filename='datatable.css')}}">
+{% endblock %}
+
 {% block content %} 
     <h2>All Users</h2>
     <table>
@@ -10,6 +16,7 @@
                 <th>Email</th>
                 <th>Password</th>
                 <th>Best Streak</th>
+                <th>Total Questions Solved</th>
             </tr>
         </thead>
         <tbody>
@@ -20,6 +27,7 @@
                     <td>{{ item.email }}</td>
                     <td>{{ item.password }}</td>
                     <td>{{ item.best_streak }}</td>
+                    <td>{{ item.total_solved }}</td>
                 </tr>
             {% endfor %}
         </tbody>
