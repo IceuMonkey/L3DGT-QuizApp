@@ -7,25 +7,35 @@ app = create_app()
 
 questions = [
     {
-        "question_text": "What is the capital of France?",
-        "answer": "Paris",
-        "options": ["Paris", "London", "Madrid", "Rome"]
+        "question_text": "What is the smallest country in the world?",
+        "answer": "Vatican City",
+        "options": ["Monaco", "Vatican City", "San Marino", "Liechtenstein"]
     },
     {
-        "question_text": "Which planet is known as the Red Planet?",
-        "answer": "Mars",
-        "options": ["Earth", "Mars", "Saturn", "Venus"]
+        "question_text": "What is the chemical symbol for gold?",
+        "answer": "Au",
+        "options": ["Ag", "Au", "Pb", "Fe"]
     },
     {
-        "question_text": "What is the largest planet in our solar system?",
-        "answer": "Jupiter",
-        "options": ["Earth", "Mars", "Jupiter", "Saturn"]
-    },    
-    {
-        "question_text": "Who painted the Mona Lisa?",
-        "answer": "Leonardo da Vinci",
-        "options": ["Vincent van Gogh", "Pablo Picasso", "Leonardo da Vinci", "Claude Monet"]
+        "question_text": "Who wrote 'To Kill a Mockingbird'?",
+        "answer": "Harper Lee",
+        "options": ["Harper Lee", "Mark Twain", "Ernest Hemingway", "F. Scott Fitzgerald"]
     },
+    {
+        "question_text": "What is the tallest mountain in the world?",
+        "answer": "Mount Everest",
+        "options": ["K2", "Kangchenjunga", "Lhotse", "Mount Everest"]
+    },
+    {
+        "question_text": "Which element has the atomic number 1?",
+        "answer": "Hydrogen",
+        "options": ["Helium", "Hydrogen", "Oxygen", "Carbon"]
+    },
+    {
+        "question_text": "What is the longest river in the world?",
+        "answer": "Nile",
+        "options": ["Amazon", "Nile", "Yangtze", "Mississippi"]
+    }
 ]
 
 with app.app_context():
