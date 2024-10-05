@@ -23,7 +23,7 @@ def login():
                 flash("Logged in Successfully!", category='success')
                 login_user(found_user, remember=True)
                 session['user_id'] = found_user.id
-                print(f"User ID set in session: {session['user_id']}")  # Debug print
+                # print(f"User ID set in session: {session['user_id']}")  # Debug print
                 return redirect(url_for('.user'))
             else:
                 flash("Incorrect password, try again.", category='error')

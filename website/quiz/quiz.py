@@ -19,14 +19,14 @@ def quiz_view():
         session['correct_streak'] = 0 
         session['best_streak'] = 0
 
-    # When there are no more questions (question_ids key in session with no values), reshuffles questions and redirect to results page
+    # When there are no more questions (i.e user ran out of questions), reshuffles questions and reloads page
     if not session['question_ids']:
         print("No Questions!") # Debug: Prints when session has run out of questions
         # Reshuffles questions back into session
+        session['question_ids'].pop
         session['question_ids'] = [q.id for q in Question.query.all()]
         random.shuffle(session['question_ids'])
         return redirect(url_for('quiz.result'))
-
 
     question_id = session['question_ids'].pop() # Pop/Remove a question ID from the list and get the corresponding question from the database
     session['current_question_id'] = question_id # Stores the popped question as the current question in the session
@@ -77,8 +77,12 @@ def result():
     best_streak = user.best_streak if user else 0
     total_solved = user.total_solved if user else 0
 
-    # Resets Correct Streak
-    session['correct_streak'] = 0 # to here
+    # Reinitialise Quiz
+    print("Resetting Quiz!")
+    session['correct_streak'] = 0
+    session['question_ids'].pop
+    session['question_ids'] = [q.id for q in Question.query.all()]
+    random.shuffle(session['question_ids'])
 
     # Renders Results page
     return render_template('quizresult.html', correct_streak=correct_streak, best_streak=best_streak, total_solved=total_solved)
