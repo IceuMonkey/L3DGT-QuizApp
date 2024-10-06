@@ -56,9 +56,11 @@ def submit_answer():
     if selected_answer == question.answer: # If answer is correct
         session['correct_streak'] += 1 # Tracks Streak for Current Quiz
         user = users.query.filter_by(id=session['user_id']).first()
+        
         if user: # If user found in db, increment total_solved
             user.total_solved = (user.total_solved or 0) + 1 # Checks total_solved is not None before incrementing
             db.session.commit()
+        
         if session['correct_streak'] > session['best_streak']: # If current streak is better than the best streak, set best_streak to the current streak
             session['best_streak'] = session['correct_streak']
             # Updating Best Streak and Total Solved in DB
@@ -66,6 +68,7 @@ def submit_answer():
                 user.best_streak = session['best_streak']
                 db.session.commit()
         # If there are no more questions, return 'end' result
+        
         if not session['question_ids']:
             print("No more Questions!") # Debug: Prints when session has run out of questions
             return jsonify({'result': 'end'})

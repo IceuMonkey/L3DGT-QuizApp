@@ -1,8 +1,18 @@
 <!-- QUIZ TEMPLATE -->
 {% extends "base.html" %}
 {% block title %}Quiz{% endblock %}
+{% block extra_css %}{% endblock %}
 {% block content %}
+    <!-- Timer & Bar -->
+    <div id="timer">Time Left: <span id="time">10</span> seconds</div>
+    <div class="progress">
+        <div id="timer-bar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+
+    <!-- Qustion text -->
     <h2>{{ question.question_text }}</h2>
+    
+    <!-- Answer Buttons -->
     <div id="options">
         {% for option in question.options %}
             <button class="btn btn-primary option-btn" data-answer="{{ option }}">{{ option }}</button>
@@ -12,28 +22,58 @@
 {% endblock %}
 {% block scripts %}
     <script>
-        document.querySelectorAll('.option-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                const answer = this.getAttribute('data-answer');
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add click event listeners to all option buttons
+            document.querySelectorAll('.option-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const answer = this.getAttribute('data-answer'); // Get the answer from the button's data attribute
+                    submitAnswer(answer); // Call the submitAnswer function with the selected answer
+                });
+            });
+
+            // Function to submit the selected answer to the server (quiz.py)
+            function submitAnswer(answer) {
                 fetch('/submit_answer', {
-                    method: 'POST',
+                    method: 'POST', //Using POST method to send data
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ answer: answer })
+                    body: JSON.stringify({ answer: answer }) // Convert the answer to a JSON string and send it in the request body
                 })
-                .then(response => response.json())
+                .then(response => response.json()) // Parse the JSON response from the server
                 .then(data => {
                     if (data.result === 'correct') {
-                        location.reload();
-                        // If Returned Result is "wrong" or "end", redirect to results page
-                    } else if (data.result === 'wrong') {
-                        window.location.href = '/result';
-                    } else if (data.result === 'end') {
-                        window.location.href = '/result';
+                        location.reload(); // Reload the page if the answer is correct
+                    } else if (data.result === 'wrong' || data.result === 'end') {
+                        window.location.href = '/result'; // Redirect to the results page if the answer is wrong or if the quiz has ended
                     }
                 });
-            });
+            }
+
+            // Timer logic
+            let timeLeft = 10; // Set the initial time left to 10 seconds
+            const timerElement = document.getElementById('time'); // Get the timer element
+            const timerBar = document.getElementById('timer-bar'); // Get timer bar
+
+            // Start the timer immediately
+            timerBar.style.transition = 'none';
+            timerBar.style.width = '100%';
+            setTimeout(() => {
+                timerBar.style.transition = 'width 10s linear';
+                timerBar.style.width = '0%';
+            }, 0);
+
+            const timerInterval = setInterval(() => {
+                timeLeft--; // Decrease the time left by 1 second
+                timerElement.textContent = timeLeft; // Update the timer display
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval); // Stop the timer when it reaches 0
+                    submitAnswer(null); // Submit a null answer if time runs out
+                    document.querySelectorAll('.option-btn').forEach(button => {
+                        button.disabled = true; // Disable all option buttons
+                    });
+                }
+            }, 1000); // Run the timer logic every second (1000 milliseconds)
         });
     </script>
 {% endblock %}
