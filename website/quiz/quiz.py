@@ -28,9 +28,16 @@ def quiz_view():
         random.shuffle(session['question_ids'])
         return redirect(url_for('quiz.result'))
 
+    # Gets current Question
     question_id = session['question_ids'].pop() # Pop/Remove a question ID from the list and get the corresponding question from the database
     session['current_question_id'] = question_id # Stores the popped question as the current question in the session
     question = Question.query.get(question_id) 
+
+    # Shuffle Answer Options
+    options = question.options # Gets current question's options as variable
+    random.shuffle(options) # Shuffles their order
+    question.options = options # Updates the current question's option's with the shuffled options 
+
     return render_template('quiz.html', question=question) # Renders Quiz template with current question
 
 @quiz.route('/submit_answer', methods=['POST'])
