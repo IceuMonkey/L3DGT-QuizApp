@@ -16,9 +16,10 @@ def quiz_view():
         session['question_ids'] = [q.id for q in Question.query.all()] # Get all question IDs from the database
         random.shuffle(session['question_ids']) # Shuffles their order
         # Initialise Session variables
+        user = users.query.filter_by(id=session['user_id']).first()
         session['correct_streak'] = 0 
-        session['best_streak'] = 0
-
+        session['best_streak'] = user.best_streak
+        
     # When there are no more questions (i.e user ran out of questions), reshuffles questions and reloads page
     if not session['question_ids']:
         print("No Questions!") # Debug: Prints when session has run out of questions
