@@ -17,6 +17,7 @@
                 <th>Password (Hashed)</th>
                 <th>Best Streak</th>
                 <th>Total Questions Solved</th>
+                <th>Difficulty</th>
             </tr>
         </thead>
         <tbody>
@@ -28,6 +29,7 @@
                     <td>{{ item.password }}</td>
                     <td>{{ item.best_streak }}</td>
                     <td>{{ item.total_solved }}</td>
+                    <td>{{ item.difficulty }}</td>
                 </tr>
             {% endfor %}
         </tbody>

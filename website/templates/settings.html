@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Settings{% endblock %}
+{% block extra_css %}{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <h2>Quiz Settings</h2>
+    <form method="POST" action="{{ url_for('settings.settings') }}">
+        <div class="form-group">
+            <label for="difficulty">Select Difficulty:</label>
+            <select class="form-control" id="difficulty" name="difficulty">
+                <option value="1" {% if current_difficulty == 1 %}selected{% endif %}>Easy</option>
+                <option value="2" {% if current_difficulty == 2 %}selected{% endif %}>Medium</option>
+                <option value="3" {% if current_difficulty == 3 %}selected{% endif %}>Hard</option>
+                <option value="4" {% if current_difficulty == 4 %}selected{% endif %}>Extreme</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Save Settings</button>
+    </form>
+</div>
+{% endblock %}

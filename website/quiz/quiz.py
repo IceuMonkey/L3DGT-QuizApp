@@ -9,6 +9,14 @@ import random
 quiz_bp = Blueprint('quiz', __name__, template_folder='../templates')
 quiz = quiz_bp
 
+# Time allowed to answer question per dificulty 
+difficulty_time_limits = {
+    1: 15, # Easy
+    2: 10, # Medium
+    3: 5,  # Hard
+    4: 3, # Extreme
+}
+
 @quiz.route('/quiz', methods=['GET', 'POST'])
 def quiz_view():
     # Initialise Quiz
@@ -39,7 +47,11 @@ def quiz_view():
     random.shuffle(options) # Shuffles their order
     question.options = options # Updates the current question's option's with the shuffled options 
 
-    return render_template('quiz.html', question=question) # Renders Quiz template with current question
+    # Time to answer question (quiz difficutly)
+    user = users.query.filter_by(id=session['user_id']).first()
+    time_limit = difficulty_time_limits.get(user.difficulty, 10) 
+
+    return render_template('quiz.html', question=question, time_limit=time_limit) # Renders Quiz template with current question
 
 @quiz.route('/submit_answer', methods=['POST'])
 @login_required
