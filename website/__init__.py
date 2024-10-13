@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_login import LoginManager
 
 from .config import Config
 from .database import db, migrate
@@ -11,14 +12,16 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
 
+    # Login Manager
+    login_manager = LoginManager()
+    login_manager.login_view = app.config['LOGIN_VIEW']
+    
     # Initialising Extensions
     db.init_app(app)
     migrate.init_app(app, db)
     bcrypt.init_app(app)
     login_manager.init_app(app)
 
-    # Login Manager
-    login_manager.login_view = 'auth.login'
 
     @login_manager.user_loader
     def load_user(id):

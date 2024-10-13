@@ -1,4 +1,21 @@
 body {
-    text-align: center;
     color: cornflowerblue;
 }
+
+html {
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+:root {
+    --bs-primary: #007bff; /* Blue as the primary color */
+  }
+  
+  /* Dark mode styles */
+.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+  }
+
+
+  /* Fancy Stuff */
+

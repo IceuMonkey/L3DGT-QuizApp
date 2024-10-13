@@ -9,7 +9,7 @@ import random
 quiz_bp = Blueprint('quiz', __name__, template_folder='../templates')
 quiz = quiz_bp
 
-# Time allowed to answer question per dificulty 
+# Time allowed to answer question per dificulty (sec)
 difficulty_time_limits = {
     1: 15, # Easy
     2: 10, # Medium
