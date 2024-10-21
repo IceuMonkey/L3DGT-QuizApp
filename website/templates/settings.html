@@ -21,7 +21,14 @@
         <!-- Dark Mode Toggle -->
         <div class="form-check form-switch mt-3 d-flex justify-content-center align-items-center">
             <label class="form-check-label me-5" for="darkModeSwitch">Dark Mode</label>
-            <input class="form-check-input" type="checkbox" id="darkModeSwitch" name="dark_mode" {% if current_theme == 'dark' %}checked{% endif %} aria-label="Switch between light and dark mode" data-bs-toggle="tooltip" data-bs-placement="right" title="Switch between light and dark mode">
+            
+            <!-- Custom Styled Switch -->
+            <div class="toggle-switch">
+                <label class="switch-label" for="darkModeSwitch">
+                    <input class="form-check-input checkbox" type="checkbox" id="darkModeSwitch" name="dark_mode" {% if current_theme == 'light' %}checked{% endif %} aria-label="Switch between light and dark mode" data-bs-toggle="tooltip" data-bs-placement="right" title="Switch between light and dark mode">
+                    <span class="slider"></span>
+                </label>
+            </div>
         </div>
 
         <button type="submit" class="btn btn-primary mt-3">Save Settings</button>
@@ -37,15 +44,15 @@
         // Set the default theme to dark if no setting is found in local storage
         const currentTheme = localStorage.getItem('bsTheme') || 'dark';
         htmlElement.setAttribute('data-bs-theme', currentTheme);
-        switchElement.checked = currentTheme === 'dark';
+        switchElement.checked = currentTheme === 'light';
 
         switchElement.addEventListener('change', function () {
             if (this.checked) {
-                htmlElement.setAttribute('data-bs-theme', 'dark');
-                localStorage.setItem('bsTheme', 'dark');
-            } else {
                 htmlElement.setAttribute('data-bs-theme', 'light');
                 localStorage.setItem('bsTheme', 'light');
+            } else {
+                htmlElement.setAttribute('data-bs-theme', 'dark');
+                localStorage.setItem('bsTheme', 'dark');
             }
         });
     });
