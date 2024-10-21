@@ -17,7 +17,7 @@ def settings():
         user = users.query.filter_by(id=session['user_id']).first()
         
         if user:
-            # Update Found USer Settings
+            # Update Found User Settings
             user.difficulty = int(difficulty)
             user.theme = dark_mode
             db.session.commit()
@@ -29,6 +29,6 @@ def settings():
 
     # Prepopulate with current settings
     current_difficulty = user.difficulty if user else 2  # Default to 'Medium' (difficulty 2)
-    current_theme = user.theme if user else 'dark'  # Default to 'dark' theme
+    current_theme = user.theme if user and not None else 'dark'  # Default to 'dark' theme
 
     return render_template('settings.html', current_difficulty=current_difficulty, current_theme=current_theme)
