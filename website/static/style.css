@@ -18,6 +18,19 @@ html {
 
 
   /* Fancy Stuff */
+  /* Login Card */
+  .card {
+    margin: 1rem;
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  button #login-btn .btn {
+    margin-top: 1rem;
+  }
+
 
   /* Dark mode switch */
   .toggle-switch {

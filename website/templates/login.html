@@ -11,29 +11,41 @@
             {% endfor %}
         {% endif %}
     {% endwith %}
-    <form method="POST">
-        <h3 align="center">Login</h3>
-        <div class="form-group">
-          <label for="email">Email Address</label>
-          <input
-            type="email"
-            class="form-control"
-            id="email"
-            name="email"
-            placeholder="Enter email"
-          />
+
+    <!-- SignUp Card -->
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h2>Login</h2>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="{{ url_for('auth.login') }}">
+                        <div class="form-group mb-3">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" class="form-control" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="password" class="form-control" required>
+                        </div>
+                        <button type="submit" id="login-btn" class="btn btn-primary w-100">Login</button>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input
-            type="password"
-            class="form-control"
-            id="password"
-            name="password"
-            placeholder="Enter password"
-          />
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body text-center">
+                    <p class="signup">Don't have an account?
+                        <a rel="noopener noreferrer" href="sign-up" class="">Create an account</a>
+                    </p>
+                </div>
+            </div>
         </div>
-        <br />
-        <button type="submit" class="btn btn-primary">Login</button>
-      </form>
+    </div>
+</div>
 {% endblock %}
