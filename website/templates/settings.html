@@ -3,36 +3,45 @@
 {% block title %}Settings{% endblock %}
 {% block extra_css %}{% endblock %}
 {% block content %}
-<div class="container mt-5">
-    <h2>Quiz Settings</h2>
-    <form method="POST" action="{{ url_for('settings.settings') }}">
-        
-        <!-- Difficulty Selector -->
-        <div class="form-group">
-            <label for="difficulty">Select Difficulty:</label>
-            <select class="form-control" id="difficulty" name="difficulty" data-bs-placement="right" title="Select your Quiz Difficulty">
-                <option value="1" {% if current_difficulty == 1 %}selected{% endif %}>Easy</option>
-                <option value="2" {% if current_difficulty == 2 %}selected{% endif %}>Medium</option>
-                <option value="3" {% if current_difficulty == 3 %}selected{% endif %}>Hard</option>
-                <option value="4" {% if current_difficulty == 4 %}selected{% endif %}>Extreme</option>
-            </select>
+<div class="container mt-5 d-flex justify-content-center">
+    <div class="card settings-card">
+        <div class="card-header text-center">
+            <h2>Quiz Settings</h2>
         </div>
+        <div class="card-body">
+            <form method="POST" action="{{ url_for('settings.settings') }}">
+                
+                <!-- Difficulty Selector -->
+                <div class="form-group">
+                    <label for="difficulty">Select Difficulty:</label>
+                    <select class="form-control" id="difficulty" name="difficulty" data-bs-placement="right" title="Select your Quiz Difficulty">
+                        <option value="1" {% if current_difficulty == 1 %}selected{% endif %}>Easy</option>
+                        <option value="2" {% if current_difficulty == 2 %}selected{% endif %}>Medium</option>
+                        <option value="3" {% if current_difficulty == 3 %}selected{% endif %}>Hard</option>
+                        <option value="4" {% if current_difficulty == 4 %}selected{% endif %}>Extreme</option>
+                    </select>
+                </div>
 
-        <!-- Dark Mode Toggle -->
-        <div class="form-check form-switch mt-3 d-flex justify-content-center align-items-center">
-            <label class="form-check-label me-5" for="darkModeSwitch">Dark Mode</label>
-            
-            <!-- Custom Styled Switch -->
-            <div class="toggle-switch">
-                <label class="switch-label" for="darkModeSwitch">
-                    <input class="form-check-input checkbox" type="checkbox" id="darkModeSwitch" name="dark_mode" {% if current_theme == 'light' %}checked{% endif %} aria-label="Switch between light and dark mode" data-bs-toggle="tooltip" data-bs-placement="right" title="Switch between light and dark mode">
-                    <span class="slider"></span>
-                </label>
-            </div>
+                <!-- Dark Mode Toggle -->
+                <div class="form-check form-switch mt-3 d-flex justify-content-center align-items-center">
+                    <label class="form-check-label me-5" for="darkModeSwitch">Dark Mode</label>
+                    
+                    <!-- Custom Styled Switch -->
+                    <div class="toggle-switch">
+                        <label class="switch-label" for="darkModeSwitch">
+                            <input class="form-check-input checkbox" type="checkbox" id="darkModeSwitch" name="dark_mode" {% if current_theme == 'light' %}checked{% endif %} aria-label="Switch between light and dark mode" data-bs-toggle="tooltip" data-bs-placement="right" title="Switch between light and dark mode">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-center mt-3">
+                    <button type="submit" class="btn btn-primary">Save Settings</button>
+                </div>
+
+            </form>
         </div>
-
-        <button type="submit" class="btn btn-primary mt-3">Save Settings</button>
-    </form>
+    </div>
 </div>
 {% endblock %}
 {% block scripts %}
