@@ -122,8 +122,8 @@ html {
   }
   
   .streak-box {
-    border: 0px solid #495057;
-    border-radius: 3px;
+    /* border: 0px solid #495057;
+    border-radius: 3px; */
     text-align: center;
     padding: 5px;
     width: 60%;
@@ -141,6 +141,46 @@ html {
     font-weight: bold;
     color: #007bff; /* Blue color for the streak number */
   }
+
+  /* Resutls Page Styling */
+  .result-card {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px; /* Add margin between the card and the navbar */
+  }
+
+  .result-card-header {
+      background-color: #007bff;
+      color: white;
+      text-align: center;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100px; /* Adjust the height as needed */
+  }
+
+  .result-box {
+      border: 1px solid #495057; /* Dark mode border */
+      border-radius: 5px;
+      text-align: center;
+      padding: 10px; /* Adjust padding as needed */
+      margin-bottom: 15px; /* Space between result boxes */
+  }
+
+  .result-box h4 {
+      margin: 0;
+      font-size: 18px; /* Adjust font size as needed */
+  }
+
+  .result-box p {
+      margin: 0;
+      font-size: 24px; /* Adjust font size as needed */
+      font-weight: bold;
+      color: #007bff; /* Blue color for the result number */
+  }
+
 
   /* Dark mode switch */
   .toggle-switch {

@@ -1,8 +1,26 @@
 {% extends "base.html" %}
 {% block title %}Result{% endblock %}
 {% block content %}
-    <h2>Your Current Streak: {{ correct_streak }}</h2>
-    <h2>Your Best Streak: {{ best_streak }}</h2>
-    <h2>Total Questions Solved: {{ total_solved }}</h2>
-    <a href="{{ url_for('quiz.quiz_view') }}" class="btn btn-primary">Try Again</a>
+<div class="container mt-5">
+    <div class="card result-card">
+        <div class="card-header result-card-header">
+            <h2>Quiz Results</h2>
+        </div>
+        <div class="card-body text-center">
+            <div class="result-box">
+                <h4>Your Current Streak</h4>
+                <p>{{ correct_streak }}</p>
+            </div>
+            <div class="result-box">
+                <h4>Your Best Streak</h4>
+                <p>{{ best_streak }}</p>
+            </div>
+            <div class="result-box">
+                <h4>Total Questions Solved</h4>
+                <p>{{ total_solved }}</p>
+            </div>
+            <a href="{{ url_for('quiz.quiz_view') }}" class="btn btn-primary mt-3">Try Again</a>
+        </div>
+    </div>
+</div>
 {% endblock %}
