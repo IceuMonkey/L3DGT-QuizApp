@@ -4,6 +4,7 @@ from flask_login  import login_required
 from .models import Question
 from ..auth.models import users
 from ..database import db
+from ..utils import calculate_level
 import random
 
 quiz_bp = Blueprint('quiz', __name__, template_folder='../templates', static_folder='../static')
@@ -76,6 +77,7 @@ def submit_answer():
         
         if user: # If user found in db, increment total_solved
             user.total_solved = (user.total_solved or 0) + 1 # Checks total_solved is not None before incrementing
+            user.level = calculate_level(user.total_solved) # Calculates and updates the user's level
             db.session.commit()
         
         if session['correct_streak'] > session['best_streak']: # If current streak is better than the best streak, set best_streak to the current streak

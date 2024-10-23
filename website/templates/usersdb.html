@@ -14,11 +14,12 @@
                 <th>ID</th>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Password (Hashed)</th>
+                <!-- <th>Password (Hashed)</th> -->
                 <th>Best Streak</th>
                 <th>Total Questions Solved</th>
                 <th>Difficulty</th>
                 <th>Theme</th>
+                <th>Level</th>
             </tr>
         </thead>
         <tbody>
@@ -27,11 +28,12 @@
                     <td>{{ item.id }}</td>
                     <td>{{ item.name }}</td>
                     <td>{{ item.email }}</td>
-                    <td>{{ item.password }}</td>
+                    <!-- <td>{{ item.password }}</td> -->
                     <td>{{ item.best_streak }}</td>
                     <td>{{ item.total_solved }}</td>
                     <td>{{ item.difficulty }}</td>
                     <td>{{ item.theme }}</td>
+                    <td>{{ item.level }}</td>
                 </tr>
             {% endfor %}
         </tbody>

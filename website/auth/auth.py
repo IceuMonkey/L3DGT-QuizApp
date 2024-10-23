@@ -73,12 +73,8 @@ def user():
     name = current_user.name
     best_streak = current_user.best_streak
     total_solved = current_user.total_solved
-    return render_template("user.html", 
-                           email=email, 
-                           name=name,
-                           best_streak=best_streak,
-                           total_solved=total_solved
-                           )
+    level = current_user.level
+    return render_template("user.html", email=email, name=name, best_streak=best_streak, total_solved=total_solved, level=level)
 
 # Logout function
 @auth.route("/logout")

@@ -13,6 +13,7 @@ class users(db.Model, UserMixin):
     total_solved = db.Column("total_solved", db.Integer, db.CheckConstraint('total_solved >= 0', name='check_total_solved_positive'), default=0)
     difficulty = db.Column("difficulty", db.Integer, default=2) # Default Medium Difficulty
     theme = db.Column(db.String(10), default='dark') # Default Dark Mode
+    level = db.Column(db.Integer, default=1) # Users always begin on level 1
 
     __table_args__ = (
         db.UniqueConstraint('name', name='uq_user_name'),
