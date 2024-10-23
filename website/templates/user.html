@@ -2,19 +2,62 @@
 {% block title %}User{% endblock %}
 
 {% block content %}
-    <!-- Flashed Message Block -->
+<div class="container mt-5 d-flex justify-content-center">
+    <div class="card user-card">
+        <div class="card-body text-center">
+            <div class="user-profile">
+                <h1>{{name}}</h1>
+                <div class="stats-box">
+                    <p>Your Highest Answer Streak: {{best_streak}}</p>
+                    <p>Total Questions Answered Correctly: {{total_solved}}</p>
+                </div>
+                <div class="progress-circle" id="progress-circle">
+                    <div class="circle">
+                        <div class="mask full">
+                            <div class="fill"></div>
+                        </div>
+                        <div class="mask half">
+                            <div class="fill"></div>
+                            <div class="fill fix"></div>
+                        </div>
+                        <div class="inside-circle">
+                            <span id="level-label">Level</span>
+                            <span id="level-text">{{level}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a href="{{ url_for('quiz.quiz_view') }}" class="btn btn-primary mt-3">Start Quiz</a>
+        </div>
+    </div>
+</div>
+
+<!-- Flashed Message Block -->
+<div class="container mt-3 d-flex justify-content-center">
     {% with messages = get_flashed_messages() %}  
         {% if messages %} <!-- Check if there are any messages -->
-            {% for msg in messages %}
-                <p>{{msg}}</p>
-            {% endfor %}
+            <div class="flashed-messages text-center">
+                {% for msg in messages %}
+                    <p>{{msg}}</p>
+                {% endfor %}
+            </div>
         {% endif %}
     {% endwith %}
+</div>
 
-<h1>Welcome, {{name}}</h1>
-<p>Your Highest Answer Streak: {{best_streak}}</p>
-<p>Total Questions Answered Correctly: {{total_solved}}</p>
-<p>Level: {{level}}</p>
-<a href="{{ url_for('quiz.quiz_view') }}" class="btn btn-primary">Start Quiz</a>
+{% endblock %}
+{% block scripts %}
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var totalSolved = {{ total_solved }};
+        var level = {{ level }};
+        var nextLevelThreshold = Math.pow(2, level);
+        var previousLevelThreshold = Math.pow(2, level - 1);
+        var progress = ((totalSolved - previousLevelThreshold) / (nextLevelThreshold - previousLevelThreshold)) * 100;
 
+        var circle = document.querySelector('.circle');
+        circle.style.background = `conic-gradient(#007bff ${progress}%, #343a40 0)`;
+        document.getElementById('level-text').innerText = level;
+    });
+</script>
 {% endblock %}

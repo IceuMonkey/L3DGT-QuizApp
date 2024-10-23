@@ -181,6 +181,91 @@ html {
       color: #007bff; /* Blue color for the result number */
   }
 
+  /* User Page */
+  .user-card {
+    width: 100%;
+    max-width: 600px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px; /* Add margin between the card and the navbar */
+  }
+  .user-profile {
+      background-color: #343a40; /* Dark mode background */
+      border: 1px solid #495057; /* Dark mode border */
+      border-radius: 5px;
+      padding: 20px;
+      color: white; /* Text color for dark mode */
+  }
+  .user-profile h1 {
+      font-size: 24px;
+      margin-bottom: 10px;
+  }
+  .user-profile p {
+      margin: 0;
+      font-size: 16px;
+  }
+  .stats-box {
+      margin-top: 20px;
+  }
+  .stats-box p {
+      margin: 5px 0;
+      font-size: 14px;
+  }
+  .progress-circle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%; /* Adjust height as needed */
+      margin-top: 20px;
+  }
+  .circle {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: conic-gradient(#007bff {{progress}}%, #343a40 0);
+      position: relative;
+  }
+  .mask {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      clip: rect(0px, 150px, 150px, 75px);
+  }
+  .mask .fill {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: #007bff;
+      clip: rect(0px, 75px, 150px, 0px);
+      position: absolute;
+  }
+  .inside-circle {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: #343a40;
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 24px;
+      font-weight: bold;
+  }
+  #level-label {
+      font-size: 14px;
+      margin-bottom: 5px;
+  }
+  #level-text {
+      font-size: 24px;
+  }
+  .flashed-messages {
+      text-align: center;
+      margin-top: 20px;
+  }
 
   /* Dark mode switch */
   .toggle-switch {
