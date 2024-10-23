@@ -15,10 +15,16 @@ html {
     background-color: #212121;
     color: #e8e8e8;
   }
+ 
+  /* Nav Bar */
+  .darkmode.navbar {
+    background-color: #292621;
+  }
 
 
-  /* Fancy Stuff */
-  /* Login Card */
+  /* Additional CSS & Fancy Stuffs */
+
+  /* Login/Sign Up Cards */
   .card {
     margin: 1rem;
   }
@@ -31,6 +37,110 @@ html {
     margin-top: 1rem;
   }
 
+  /* Quiz Styling */
+  .quiz-card {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .quiz-card-header {
+    text-align: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px; /* Adjust the height as needed */
+  }
+
+  .btn-block {
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%; /* Ensure buttons take full width of their column */
+  }
+
+  /* Quiz Animations */
+  .hidden {
+    display: none;
+  }
+
+  #animation-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999; /* Always layered above everything in the page */
+      pointer-events: none; /* Prevents interaction with the animation container */
+  }
+
+  #tick, #cross {
+      width: 10rem;
+      height: 10rem;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+  }
+
+  #tick.show, #cross.show {
+      opacity: 1;
+  }
+
+  #overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    z-index: 9998; /* Displays right below tick/cross animation */
+    display: none;
+  }
+
+  #overlay.show {
+      display: block;
+  }
+
+  /* Timer Bar */
+  .progress-container {
+    width: 50%; /* Adjust the width as needed */
+    margin: 0 auto; /* Center the progress bar */
+  }
+
+  #timer {
+    text-align: center; /* Center the text */
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 2.2em;
+  }
+
+  /* Answer Streak Display */
+  #streak-display {
+    margin-top: 1.5rem;
+  }
+  
+  .streak-box {
+    border: 0px solid #495057;
+    border-radius: 3px;
+    text-align: center;
+    padding: 5px;
+    width: 60%;
+    margin: 0 auto;
+  }
+
+  .streak-box h5 {
+    margin: 0;
+    font-size: 14px; /* Smaller font size */
+  }
+
+  .streak-box p {
+    margin: 0;
+    font-size: 20px; /* Smaller font size */
+    font-weight: bold;
+    color: #007bff; /* Blue color for the streak number */
+  }
 
   /* Dark mode switch */
   .toggle-switch {

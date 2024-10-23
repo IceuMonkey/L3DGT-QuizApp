@@ -3,26 +3,91 @@
 {% block title %}Quiz{% endblock %}
 {% block extra_css %}{% endblock %}
 {% block content %}
-    <!-- Timer & Bar -->
-    <div id="timer">Time Left: <span id="time">{{ time_limit }}</span> seconds</div>
-    <div class="progress">
-        <div id="timer-bar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+    <!-- Answer Streak Displays -->
+    <div id="streak-display" class="row mb-3">
+        <div class="col-6">
+            <div class="streak-box">
+                <h5>Current Streak</h5>
+                <p>{{ current_streak }}</p>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="streak-box">
+                <h5>All Time</h5>
+                <p>{{ best_streak }}</p>
+            </div>
+        </div>
     </div>
 
-    <!-- Question text -->
-    <h2>{{ question.question_text }}</h2>
-    
-    <!-- Answer Buttons -->
-    <div id="options">
-        {% for option in question.options %}
-            <button class="btn btn-primary option-btn" data-answer="{{ option }}">{{ option }}</button>
-        {% endfor %}
+    <!-- Timer Display -->
+    <!-- Timer Text -->
+    <div id="timer" class="text-center">
+        <strong><span id="time">{{ time_limit }}</span></strong>
     </div>
-    <div id="result"></div>
+    <!-- Timer Bar -->
+    <div class="progress-container">
+        <div class="progress">
+            <div id="timer-bar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <div class="card quiz-card">
+            <div class="card-header quiz-card-header">
+                <h4>{{ question.question_text }}</h4>
+            </div>
+            <div class="card-body">
+                <form>
+                    <div class="form-group">
+                        <div class="row">
+                            {% for option in question.options %}
+                                <div class="col-6 mb-2">
+                                    <button type="button" class="btn btn-primary btn-block option-btn" data-answer="{{ option }}">{{ option }}</button>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </form>
+                <div id="result"></div>
+                <div id="animation-container">
+                    <img id="tick" class="hidden" src="{{ url_for('static', filename='images/tick.png') }}" alt="Tick">
+                    <img id="cross" class="hidden" src="{{ url_for('static', filename='images/cross.png') }}" alt="Cross">
+                </div>
+                <div id="overlay"></div>
+            </div>
+        </div>
+    </div>
+    
+
 {% endblock %}
 {% block scripts %}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            const tick = document.getElementById('tick');
+            const cross = document.getElementById('cross');
+            const overlay = document.getElementById('overlay');
+
+            function showAnimation(result) {
+                overlay.classList.add('show');
+                if (result === 'correct') {
+                    tick.classList.remove('hidden');
+                    tick.classList.add('show');
+                    setTimeout(() => {
+                        tick.classList.remove('show');
+                        tick.classList.add('hidden');
+                        overlay.classList.remove('show');
+                    }, 1000);
+                } else if (result === 'wrong') {
+                    cross.classList.remove('hidden');
+                    cross.classList.add('show');
+                    setTimeout(() => {
+                        cross.classList.remove('show');
+                        cross.classList.add('hidden');
+                        overlay.classList.remove('show');
+                    }, 1000);
+                }
+            }
+
             // Add click event listeners to all option buttons
             document.querySelectorAll('.option-btn').forEach(button => {
                 button.addEventListener('click', function() {
@@ -42,6 +107,7 @@
                 })
                 .then(response => response.json()) // Parse the JSON response from the server
                 .then(data => {
+                    showAnimation(data.result); // Show the animation based on the result
                     if (data.result === 'correct') {
                         location.reload(); // Reload the page if the answer is correct
                     } else if (data.result === 'wrong' || data.result === 'end') {

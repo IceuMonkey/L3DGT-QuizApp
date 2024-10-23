@@ -6,7 +6,7 @@ from ..auth.models import users
 from ..database import db
 import random
 
-quiz_bp = Blueprint('quiz', __name__, template_folder='../templates')
+quiz_bp = Blueprint('quiz', __name__, template_folder='../templates', static_folder='../static')
 quiz = quiz_bp
 
 # Time allowed to answer question per dificulty (sec)
@@ -51,7 +51,11 @@ def quiz_view():
     user = users.query.filter_by(id=session['user_id']).first()
     time_limit = difficulty_time_limits.get(user.difficulty, 10) 
 
-    return render_template('quiz.html', question=question, time_limit=time_limit) # Renders Quiz template with current question
+    # Passes the user's current and best answer streak to html template
+    current_streak = session['correct_streak']
+    best_streak = session['best_streak']
+
+    return render_template('quiz.html', question=question, time_limit=time_limit, current_streak=current_streak, best_streak=best_streak) # Renders Quiz template with current question
 
 @quiz.route('/submit_answer', methods=['POST'])
 @login_required
