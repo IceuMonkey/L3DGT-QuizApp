@@ -12,12 +12,10 @@
     {% block extra_css %}{% endblock %} <!-- Block for page specific Static CSS -->
  
     <style></style>
-
-
 </head>
 <body>
     <!-- NAV BAR -->
-    <nav class="navbar sticky-top">
+    <nav class="navbar navbar-expand-lg sticky-top custom-navbar">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">Quiziest Quiz</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
@@ -31,20 +29,24 @@
           <div class="offcanvas-body">
             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="/">Home</a>
+                {% if current_user.is_authenticated %}
+                  <a class="nav-link" aria-current="page" href="{{ url_for('auth.user') }}">User</a>
+                {% else %}
+                  <a class="nav-link" aria-current="page" href="/">Home</a>
+                {% endif %}
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/login">Login</a>
               </li>
-              <li class="nav-item"></li>
+              <li class="nav-item">
                 <a class="nav-link" href="/sign-up">Sign Up</a>
               </li>
-              <li class="nav-item"></li>
-                <a class="nav-link" href="/logout">Logout</a>
-              </li>
-              <li class="nav-item"></li>
+              <li class="nav-item">
                 <a class="nav-link" href="/settings">Settings</a>
-              </li>              
+              </li>    
+              <li class="nav-item">
+                <a class="nav-link" href="/logout">Sign Out</a>
+              </li>          
             </ul>
           </div>
         </div>
@@ -86,7 +88,7 @@
     </script>
     {% endblock %}
 
-    <!-- Page Spcific Scripts -->
+    <!-- Page Specific Scripts -->
     {% block scripts %}
     {% endblock %}
 </body>

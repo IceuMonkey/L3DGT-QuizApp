@@ -31,11 +31,15 @@
         </div>
     </div>
 
+    <!-- Quiz Display -->
     <div class="container mt-5">
         <div class="card quiz-card">
+            <!-- Question Text -->
             <div class="card-header quiz-card-header">
                 <h4>{{ question.question_text }}</h4>
             </div>
+
+            <!-- Answer Buttons -->
             <div class="card-body">
                 <form>
                     <div class="form-group">
@@ -49,6 +53,8 @@
                     </div>
                 </form>
                 <div id="result"></div>
+
+                <!-- Correct/Incorrect animations -->
                 <div id="animation-container">
                     <img id="tick" class="hidden" src="{{ url_for('static', filename='images/tick.png') }}" alt="Tick">
                     <img id="cross" class="hidden" src="{{ url_for('static', filename='images/cross.png') }}" alt="Cross">

@@ -3,14 +3,18 @@
 
 <!-- Login Form -->
 {% block content %}
-    <!-- Block to show flashed messages -->
+<!-- Flashed Message Block -->
+<div class="container mt-3 d-flex justify-content-center">
     {% with messages = get_flashed_messages() %}  
         {% if messages %} <!-- Check if there are any messages -->
-            {% for msg in messages %}
-                <p>{{msg}}</p>
-            {% endfor %}
+            <div class="flashed-messages text-center">
+                {% for msg in messages %}
+                    <p>{{msg}}</p>
+                {% endfor %}
+            </div>
         {% endif %}
     {% endwith %}
+</div>
 
     <!-- SignUp Card -->
 <div class="container mt-5">
@@ -36,6 +40,8 @@
             </div>
         </div>
     </div>
+
+    <!-- Sign Up link card -->
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card">

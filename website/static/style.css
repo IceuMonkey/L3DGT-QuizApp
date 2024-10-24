@@ -1,7 +1,3 @@
-body {
-    color: cornflowerblue;
-}
-
 html {
     transition: background-color 0.6s ease, color 0.6s ease;
   }
@@ -17,10 +13,34 @@ html {
   }
  
   /* Nav Bar */
-  .darkmode .navbar {
-    background-color: #292621;
+  .custom-navbar {
+    background-color: var(--navbar-bg-color);
+    color: var(--navbar-text-color);
   }
 
+  .custom-navbar .nav-link {
+      color: var(--navbar-link-color);
+  }
+
+  .custom-navbar .nav-link:hover {
+      color: var(--navbar-link-hover-color);
+  }
+
+  /* Dark theme */
+  [data-bs-theme="dark"] {
+      --navbar-bg-color: #343a40;
+      --navbar-text-color: #ffffff;
+      --navbar-link-color: #ffffff;
+      --navbar-link-hover-color: #cccccc;
+  }
+
+  /* Light theme */
+  [data-bs-theme="light"] {
+      --navbar-bg-color: #f8f9fa;
+      --navbar-text-color: #000000;
+      --navbar-link-color: #000000;
+      --navbar-link-hover-color: #555555;
+  }
 
   /* Additional CSS & Fancy Stuffs */
 
@@ -158,25 +178,25 @@ html {
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 100px; /* Adjust the height as needed */
+      height: 100px;
   }
 
   .result-box {
-      border: 1px solid #495057; /* Dark mode border */
+      border: 1px solid #495057;
       border-radius: 5px;
       text-align: center;
-      padding: 10px; /* Adjust padding as needed */
+      padding: 10px;
       margin-bottom: 15px; /* Space between result boxes */
   }
 
   .result-box h4 {
       margin: 0;
-      font-size: 18px; /* Adjust font size as needed */
+      font-size: 18px; 
   }
 
   .result-box p {
       margin: 0;
-      font-size: 24px; /* Adjust font size as needed */
+      font-size: 24px; 
       font-weight: bold;
       color: #007bff; /* Blue color for the result number */
   }
@@ -187,7 +207,7 @@ html {
     max-width: 600px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-top: 20px; /* Add margin between the card and the navbar */
+    margin-top: 20px; /* Adds margin between the card and the navbar */
   }
 
   .settings-card .card-header {
@@ -198,103 +218,103 @@ html {
   }
 
   /* User Page */
-  .user-card {
+.user-card {
     width: 100%;
     max-width: 600px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-top: 20px; /* Add margin between the card and the navbar */
-  }
+}
 
-  .user-profile {
-      background-color: #343a40; /* Dark mode background */
-      border: 1px solid #495057; /* Dark mode border */
-      border-radius: 5px;
-      padding: 20px;
-      color: white; /* Text color for dark mode */
-  }
-  
-  .user-profile h1 {
-      font-size: 24px;
-      margin-bottom: 10px;
-  }
+.user-profile {
+    border: 1px solid #495057; /* Dark mode border */
+    border-radius: 5px;
+    padding: 20px;
+}
 
-  .user-profile p {
-      margin: 0;
-      font-size: 16px;
-  }
+.user-profile h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
 
-  .stats-box {
-      margin-top: 20px;
-  }
+.user-profile p {
+    margin: 0;
+    font-size: 16px;
+}
 
-  .stats-box p {
-      margin: 5px 0;
-      font-size: 14px;
-  }
+.stats-box {
+    margin-top: 20px;
+}
 
-  .progress-circle {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100%; /* Adjust height as needed */
-      margin-top: 20px;
-  }
+.stats-box p {
+    margin: 5px 0;
+    font-size: 14px;
+}
 
-  .circle {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      background: conic-gradient(#007bff {{progress}}%, #343a40 0);
-      position: relative;
-  }
+/* Level Progress Circle */
+.progress-circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    margin-top: 20px;
+}
 
-  .mask {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      clip: rect(0px, 150px, 150px, 75px);
-  }
+.circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: #343a40; /* Dark grey background for circle */
+    position: relative;
+}
 
-  .mask .fill {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      background: #007bff;
-      clip: rect(0px, 75px, 150px, 0px);
-      position: absolute;
-  }
+.mask {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    clip: rect(0px, 150px, 150px, 75px);
+}
 
-  .inside-circle {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      background: #343a40;
-      position: absolute;
-      top: 15px;
-      left: 15px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 24px;
-      font-weight: bold;
-  }
+.mask .fill {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #007bff;
+    clip: rect(0px, 75px, 150px, 0px);
+    position: absolute;
+}
 
-  #level-label {
-      font-size: 14px;
-      margin-bottom: 5px;
-  }
+.inside-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: #343a40;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
 
-  #level-text {
-      font-size: 24px;
-  }
+#level-label {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
 
-  .flashed-messages {
-      text-align: center;
-      margin-top: 20px;
-  }
+#level-text {
+    font-size: 24px;
+
+}
+
+.flashed-messages {
+    text-align: center;
+    margin-top: 20px;
+}
 
   /* Dark mode switch */
   .toggle-switch {
@@ -358,4 +378,3 @@ html {
     -webkit-box-shadow: none;
     box-shadow: none;
   }
-  

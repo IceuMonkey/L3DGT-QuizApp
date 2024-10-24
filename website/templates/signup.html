@@ -1,6 +1,21 @@
 {% extends "base.html" %}
 {% block title %}Sign Up{% endblock %}
 {% block content %}
+<!-- Flashed Message Block -->
+<div class="container mt-3 d-flex justify-content-center">
+  {% with messages = get_flashed_messages() %}  
+      {% if messages %} <!-- Check if there are any messages -->
+          <div class="flashed-messages text-center">
+              {% for msg in messages %}
+                  <p>{{msg}}</p>
+              {% endfor %}
+          </div>
+      {% endif %}
+  {% endwith %}
+</div>
+
+
+
 <div class="container mt-5">
   <div class="row justify-content-center">
     <div class="col-md-6">
@@ -9,6 +24,7 @@
           <h2>Sign Up</h2>
         </div>
 
+        <!-- Sign Up Form -->
         <div class="card-body">
           <form method="POST">
             <div class="form-group">
@@ -37,6 +53,8 @@
       </div>
     </div>
   </div>
+
+  <!-- Easy link to /login -->
   <div class="row justify-content-center">
     <div class="col-md-6">
         <div class="card">
@@ -47,17 +65,5 @@
             </div>
         </div>
     </div>
-</div>
-
-</div>
-
-    <!-- Block to show flashed messages -->
-    {% with messages = get_flashed_messages() %}  
-        {% if messages %} <!-- Check if there are any messages -->
-            {% for msg in messages %}
-                <p>{{msg}}</p>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
-    
+  </div>
 {% endblock %}

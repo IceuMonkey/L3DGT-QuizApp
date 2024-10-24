@@ -3,12 +3,14 @@
     Home Page
 {% endblock %}
 
-
 {% block content %}
-    <h1>The Quizest Quiz</h1>
-    <h2>How many can you get correct?</h2>
-    <a href="{{ url_for('auth.login') }}" class="btn btn-primary">Login in to Play!</a>
-
-    <!-- <image src="{{ url_for('static', filename='images/war-cat.png')}}"> -->
+<div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="card text-center">
+        <div class="card-body">
+            <h1 class="card-title">The Quizest Quiz</h1>
+            <h2 class="card-subtitle mb-2 text-muted">How many can you get correct?</h2>
+            <a href="{{ url_for('auth.login') }}" class="btn btn-primary mt-3">Login to Play!</a>
+        </div>
+    </div>
+</div>
 {% endblock %}
-        
