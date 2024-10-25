@@ -1,27 +1,35 @@
-{% extends "base.html" %}
+{% extends "base.html" %} <!-- This line tells the template to extend from base template "base.html" -->
+
 {% block title %}Result{% endblock %}
+
 {% block content %}
-<div class="container mt-5">
+
+<div class="container mt-5"> <!-- Creates container with a top margin of 5 units. -->
     <div class="card result-card">
-        <div class="card-header result-card-header">
+        <div class="card-header result-card-header">     
             <h2>Quiz Results</h2>
         </div>
-        <div class="card-body text-center">
-            <div class="result-box">
+
+        <div class="card-body text-center"><!-- This div creates the body section of the card and centers the text. -->
+
+            <div class="result-box"> <!-- This div creates a box to display the current streak -->
                 <h4>Your Current Streak</h4>
-                <p>{{ correct_streak }}</p>
+                <p>{{ correct_streak }}</p> <!-- This paragraph displays the value of the variable "correct_streak". -->
             </div>
-            <div class="result-box">
+
+            <div class="result-box"> <!-- This div creates a box to display the best streak -->
                 <h4>Your Best Streak</h4>
-                <p>{{ best_streak }}</p>
+                <p>{{ best_streak }}</p> <!-- Displays the value of the variable "best_streak" -->
             </div>
-            <div class="result-box">
+
+            <div class="result-box"> <!-- This div creates a box to display the total questions solved -->
                 <h4>Total Questions Solved</h4>
-                <p>{{ total_solved }}</p>
+                <p>{{ total_solved }}</p> <!-- Displays the value of the variable "total_solved" -->
             </div>
-            <div class="justify-content-center">
-            <a href="{{ url_for('quiz.quiz_view') }}" class="btn btn-primary mt-3">Try Again</a>
-            <a href="{{ url_for('auth.user') }}" class="btn btn-primary mt-3">User Page</a>
+
+            <div class="justify-content-center"> <!-- Div centers the buttons horizontally -->
+                <a href="{{ url_for('quiz.quiz_view') }}" class="btn btn-primary mt-3">Try Again</a> <!-- This link creates a button that redirects to the quiz page -->
+                <a href="{{ url_for('auth.user') }}" class="btn btn-primary mt-3">User Page</a> <!-- This link creates a button that redirects to the user page -->
             </div>
         </div>
     </div>

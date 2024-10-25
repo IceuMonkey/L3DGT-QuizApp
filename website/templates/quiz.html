@@ -22,7 +22,7 @@
     <!-- Timer Display -->
     <!-- Timer Text -->
     <div id="timer" class="text-center">
-        <strong><span id="time">{{ time_limit }}</span></strong>
+        <strong><span id="time">{{ time_limit }}</span></strong> <!-- Strong Container for Bold text -->
     </div>
     <!-- Timer Bar -->
     <div class="progress-container">
@@ -36,7 +36,7 @@
         <div class="card quiz-card">
             <!-- Question Text -->
             <div class="card-header quiz-card-header">
-                <h4>{{ question.question_text }}</h4>
+                <h4>{{ question.question_text }}</h4> <!-- Retrives question text from quiz.py and db -->
             </div>
 
             <!-- Answer Buttons -->
@@ -44,6 +44,7 @@
                 <form>
                     <div class="form-group">
                         <div class="row">
+                            <!-- Creates a button for every answer option in database -->
                             {% for option in question.options %}
                                 <div class="col-6 mb-2">
                                     <button type="button" class="btn btn-primary btn-block option-btn" data-answer="{{ option }}">{{ option }}</button>
@@ -59,7 +60,7 @@
                     <img id="tick" class="hidden" src="{{ url_for('static', filename='images/tick.png') }}" alt="Tick">
                     <img id="cross" class="hidden" src="{{ url_for('static', filename='images/cross.png') }}" alt="Cross">
                 </div>
-                <div id="overlay"></div>
+                <div id="overlay"></div> <!-- Dimmed overlay -->
             </div>
         </div>
     </div>
@@ -74,18 +75,22 @@
             const overlay = document.getElementById('overlay');
 
             function showAnimation(result) {
-                overlay.classList.add('show');
-                if (result === 'correct') {
+                overlay.classList.add('show'); // Always show the dim overlay
+                if (result === 'correct') { // If answer is correct
+                    // Shows tick img
                     tick.classList.remove('hidden');
                     tick.classList.add('show');
+                    // Removes tick and overlay after 1 second
                     setTimeout(() => {
                         tick.classList.remove('show');
                         tick.classList.add('hidden');
                         overlay.classList.remove('show');
                     }, 1000);
-                } else if (result === 'wrong') {
+                } else if (result === 'wrong') { // If answer is wrong
+                    // Shows x cross img
                     cross.classList.remove('hidden');
                     cross.classList.add('show');
+                    // Removes cross and overlay after 1 second
                     setTimeout(() => {
                         cross.classList.remove('show');
                         cross.classList.add('hidden');
@@ -115,14 +120,14 @@
                 .then(data => {
                     showAnimation(data.result); // Show the animation based on the result
                     if (data.result === 'correct') {
-                        location.reload(); // Reload the page if the answer is correct
+                        location.reload(); // Reload the page if the answer is correct (i.e. refresh new question)
                     } else if (data.result === 'wrong' || data.result === 'end') {
-                        window.location.href = '/result'; // Redirect to the results page if the answer is wrong or if the quiz has ended
+                        window.location.href = '/result'; // Redirect to the results page if the answer is wrong, time has run out or if their are no more question
                     }
                 });
             }
 
-            // Timer logic
+            // Timer
             let timeLeft = {{ time_limit }}; // Set the initial time left to the time limit based on difficulty
             const timerElement = document.getElementById('time'); // Get the timer element
             const timerBar = document.getElementById('timer-bar'); // Get timer bar
@@ -130,11 +135,13 @@
             // Start the timer immediately
             timerBar.style.transition = 'none';
             timerBar.style.width = '100%';
-            setTimeout(() => {
+            // Sets animation length based on time limit
+            setTimeout(() => { 
                 timerBar.style.transition = `width ${timeLeft}s linear`;
                 timerBar.style.width = '0%';
             }, 0);
 
+            // Timer logic
             const timerInterval = setInterval(() => {
                 timeLeft--; // Decrease the time left by 1 second
                 timerElement.textContent = timeLeft; // Update the timer display

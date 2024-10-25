@@ -6,9 +6,11 @@
 <link rel="stylesheet" type='text/css' href="{{ url_for('static', filename='datatable.css')}}">
 {% endblock %}
 
+<!-- Table to display users -->
 {% block content %} 
     <h2>All Users</h2>
     <table>
+        <!-- Table Column Titles -->
         <thead>
             <tr>
                 <th>ID</th>
@@ -22,18 +24,22 @@
                 <th>Level</th>
             </tr>
         </thead>
+        <!-- Main table to display users -->
         <tbody>
-            {% for item in values %}
+            {% for item in values %} <!-- For each row in users db -->
                 <tr>
-                    <td>{{ item.id }}</td>
-                    <td>{{ item.name }}</td>
-                    <td>{{ item.email }}</td>
+                    <td>{{ item.id }}</td> <!-- User ID -->
+                    <td>{{ item.name }}</td> <!-- Username -->
+                    <td>{{ item.email }}</td> <!-- User Email -->
                     <!-- <td>{{ item.password }}</td> -->
+                    
+                    <!-- User Stats -->
                     <td>{{ item.best_streak }}</td>
                     <td>{{ item.total_solved }}</td>
                     <td>{{ item.difficulty }}</td>
-                    <td>{{ item.theme }}</td>
-                    <td>{{ item.level }}</td>
+                    
+                    <td>{{ item.theme }}</td> <!-- If user has light or dark mode toggled -->
+                    <td>{{ item.level }}</td> <!-- User Level -->
                 </tr>
             {% endfor %}
         </tbody>

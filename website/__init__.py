@@ -10,7 +10,7 @@ from .quiz.models import Question
 
 def create_app():
     app = Flask(__name__)
-    app.config.from_object(Config)
+    app.config.from_object(Config) # Retrieves config settings from Config class in config.py 
 
     # Login Manager
     login_manager = LoginManager()
@@ -25,6 +25,7 @@ def create_app():
 
     @login_manager.user_loader
     def load_user(id):
+        # Define user loader callback for flask_login 
         return users.query.get(int(id))
 
     # Registering Blueprints
@@ -42,4 +43,4 @@ def create_app():
 
     print("Blueprints registered: ", app.blueprints)  # Debug: Print registered blueprints
 
-    return app
+    return app # Return app instance

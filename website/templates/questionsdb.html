@@ -6,9 +6,11 @@
 <link rel="stylesheet" type='text/css' href="{{ url_for('static', filename='datatable.css')}}">
 {% endblock %}
 
+<!-- Table to display questions in database -->
 {% block content %} 
     <h2>All Questions</h2>
     <table>
+        <!-- Column headers -->
         <thead>
             <tr>
                 <th>ID</th>
@@ -17,13 +19,15 @@
                 <th>Options</th>
             </tr>
         </thead>
+        <!-- Table for questions -->
         <tbody>
-            {% for item in values %}
+            {% for item in values %} <!-- For each question in db -->
                 <tr>
-                    <td>{{ item.id }}</td>
-                    <td>{{ item.question_text }}</td>
-                    <td>{{ item.answer }}</td>
+                    <td>{{ item.id }}</td> <!-- Question ID -->
+                    <td>{{ item.question_text }}</td> <!-- Question Text -->
+                    <td>{{ item.answer }}</td> <!-- Correct Answer -->
                     <td>
+                        <!-- Creates list of answer options -->
                         <ul>
                             {% for option in item.options %}
                                 <li>{{ option }}</li>

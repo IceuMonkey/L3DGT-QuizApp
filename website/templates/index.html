@@ -1,15 +1,14 @@
-{% extends "base.html" %}
-{% block title %}
-    Home Page
-{% endblock %}
+{% extends "base.html" %} <!-- This line tells the template to extend from base template "base.html" -->
+{% block title %}Home Page{% endblock %} <!-- Sets title of page to "Home Page" -->
 
+<!-- Page Specific Content -->
 {% block content %}
-<div class="d-flex justify-content-center align-items-center vh-100">
-    <div class="card text-center">
+<div class="d-flex justify-content-center align-items-center vh-100"> <!-- flexbox container that centers its content both horizontally and vertically, and sets the height to 100% of the viewport height -->
+    <div class="card text-center"> <!-- Card element that centers text inside it -->
         <div class="card-body">
             <h1 class="card-title">The Quizest Quiz</h1>
             <h2 class="card-subtitle mb-2 text-muted">How many can you get correct?</h2>
-            <a href="{{ url_for('auth.login') }}" class="btn btn-primary mt-3">Login to Play!</a>
+            <a href="{{ url_for('auth.login') }}" class="btn btn-primary mt-3">Login to Play!</a> <!-- This link creates a button that redirects to the login page -->
         </div>
     </div>
 </div>

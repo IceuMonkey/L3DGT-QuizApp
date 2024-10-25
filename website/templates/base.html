@@ -75,13 +75,14 @@
             htmlElement.setAttribute('data-bs-theme', currentTheme);
             switchElement.checked = currentTheme === 'light';
 
+            // Event listener for DarkMode Toggle Switch on Settings Page
             switchElement.addEventListener('change', function () {
-                if (this.checked) {
-                  htmlElement.setAttribute('data-bs-theme', 'light');
-                  localStorage.setItem('bsTheme', 'light');
-                } else {
-                    htmlElement.setAttribute('data-bs-theme', 'dark');
-                    localStorage.setItem('bsTheme', 'dark');
+                if (this.checked) { // If switch is toggled
+                  htmlElement.setAttribute('data-bs-theme', 'light'); // Set theme to light
+                  localStorage.setItem('bsTheme', 'light'); // Save theme to local storage
+                } else { // If switch is not toggled
+                    htmlElement.setAttribute('data-bs-theme', 'dark'); // Set theme to dark
+                    localStorage.setItem('bsTheme', 'dark'); // Save theme in local storage
                 }
             });
         });

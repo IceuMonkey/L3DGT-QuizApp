@@ -1,41 +1,44 @@
-{% extends "base.html" %}
-{% block title %}Login Page{% endblock %}
+{% extends "base.html" %} <!-- This line tells the template to extend from base template "base.html" -->
+{% block title %}Login Page{% endblock %}  <!-- Page title set to "Login Page" -->
 
-<!-- Login Form -->
 {% block content %}
 <!-- Flashed Message Block -->
-<div class="container mt-3 d-flex justify-content-center">
+<div class="container mt-3 d-flex justify-content-center"> <!-- flexbox container with top margin of 3 units that centers its content horizontally -->
     {% with messages = get_flashed_messages() %}  
         {% if messages %} <!-- Check if there are any messages -->
             <div class="flashed-messages text-center">
                 {% for msg in messages %}
-                    <p>{{msg}}</p>
+                    <p>{{msg}}</p> <!-- Displays flashed messages as Paragraph -->
                 {% endfor %}
             </div>
         {% endif %}
     {% endwith %}
 </div>
 
-    <!-- SignUp Card -->
-<div class="container mt-5">
+<!-- Login Card -->
+<div class="container mt-5"> <!-- top margin of 5 -->
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card">
+                <!-- Card Header -->
                 <div class="card-header text-center">
                     <h2>Login</h2>
                 </div>
+                <!-- Card Body -->
                 <div class="card-body">
-                    <form method="POST" action="{{ url_for('auth.login') }}">
+                    <!-- Login Form -->
+                    <form method="POST" action="{{ url_for('auth.login') }}"> <!-- Sends POST request to /login when submitted -->
                         <div class="form-group mb-3">
                             <label for="email">Email</label>
-                            <input type="email" id="email" name="email" class="form-control" required>
+                            <input type="email" id="email" name="email" class="form-control" required> <!-- Text input for user email -->
                         </div>
                         <div class="form-group mb-3">
                             <label for="password">Password</label>
-                            <input type="password" id="password" name="password" class="form-control" required>
+                            <input type="password" id="password" name="password" class="form-control" required> <!-- Text input for user password -->
                         </div>
-                        <button type="submit" id="login-btn" class="btn btn-primary w-100">Login</button>
+                        <button type="submit" id="login-btn" class="btn btn-primary w-100">Login</button> <!-- Button to submit form -->
                     </form>
+
                 </div>
             </div>
         </div>
@@ -47,7 +50,7 @@
             <div class="card">
                 <div class="card-body text-center">
                     <p class="signup">Don't have an account?
-                        <a rel="noopener noreferrer" href="sign-up" class="">Create an account</a>
+                        <a rel="noopener noreferrer" href="sign-up" class="">Create an account</a> <!-- Link creates button to sign-up page -->
                     </p>
                 </div>
             </div>

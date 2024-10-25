@@ -3,7 +3,7 @@ from flask_login import UserMixin
 
 from ..database import db
 
-# DB Schema
+# Users DB Schema
 class users(db.Model, UserMixin):
     id = db.Column("id", db.Integer, primary_key=True) 
     name = db.Column("name", db.String(100))
@@ -16,6 +16,7 @@ class users(db.Model, UserMixin):
     level = db.Column(db.Integer, default=1) # Users always begin on level 1
 
     __table_args__ = (
+        # Names and email must be unique
         db.UniqueConstraint('name', name='uq_user_name'),
         db.UniqueConstraint('email', name='uq_user_email'),
     )
