@@ -12,20 +12,6 @@ html {
     color: #e8e8e8;
   }
  
-  /* Nav Bar */
-  .custom-navbar {
-    background-color: var(--navbar-bg-color);
-    color: var(--navbar-text-color);
-  }
-
-  .custom-navbar .nav-link {
-      color: var(--navbar-link-color);
-  }
-
-  .custom-navbar .nav-link:hover {
-      color: var(--navbar-link-hover-color);
-  }
-
   /* Dark theme */
   [data-bs-theme="dark"] {
       --navbar-bg-color: #343a40;
@@ -43,6 +29,26 @@ html {
   }
 
   /* Additional CSS & Fancy Stuffs */
+    /* Nav Bar */
+  .custom-navbar {
+      background-color: var(--navbar-bg-color);
+      color: var(--navbar-text-color);
+  }
+  
+  .custom-navbar .nav-link {
+        color: var(--navbar-link-color);
+  }
+  
+  .custom-navbar .nav-link:hover {
+        color: var(--navbar-link-hover-color);
+  }
+  
+  @media (max-width: 768px) {
+    .offcanvas {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+  }
 
   /* Login/Sign Up Cards */
   .card {
